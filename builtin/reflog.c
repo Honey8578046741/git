@@ -563,7 +563,7 @@ static int expire_unreachable_callback(const struct option *opt,
 
 	if (parse_expiry_date(arg, &cmd->expire_unreachable))
 		die(_("invalid timestamp '%s' given to '--%s'"),
-				arg, opt->long_name);
+		    arg, opt->long_name);
 
 	cmd->explicit_expiry |= EXPIRE_UNREACH;
 	return 0;
@@ -577,7 +577,7 @@ static int expire_total_callback(const struct option *opt,
 
 	if (parse_expiry_date(arg, &cmd->expire_total))
 		die(_("invalid timestamp '%s' given to '--%s'"),
-				arg, opt->long_name);
+		    arg, opt->long_name);
 
 	cmd->explicit_expiry |= EXPIRE_TOTAL;
 	return 0;
@@ -594,7 +594,7 @@ static int cmd_reflog_expire(int argc, const char **argv, const char *prefix)
 	const struct option options[] = {
 		OPT_BIT(0, "dry-run", &flags, N_("do not actually prune any entries"),
 			EXPIRE_REFLOGS_DRY_RUN),
-			OPT_BIT(0, "rewrite", &flags,
+		OPT_BIT(0, "rewrite", &flags,
 			N_("rewrite the old SHA1 with the new SHA1 of the entry that now precedes it"),
 			EXPIRE_REFLOGS_REWRITE),
 		OPT_BIT(0, "updateref", &flags,
