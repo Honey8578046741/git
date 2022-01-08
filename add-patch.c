@@ -472,6 +472,13 @@ static int parse_diff(struct add_p_state *s, const struct pathspec *ps)
 			eol = pend;
 
 		if (starts_with(p, "diff ")) {
+			if (marker == '-' || marker == '+')
+				/*
+				 * Last hunk ended in non-context line (i.e. it
+				 * appended lines to the file, so there are no
+				 * trailing context lines).
+				 */
+				hunk->splittable_into++;
 			ALLOC_GROW_BY(s->file_diff, s->file_diff_nr, 1,
 				   file_diff_alloc);
 			file_diff = s->file_diff + s->file_diff_nr - 1;
